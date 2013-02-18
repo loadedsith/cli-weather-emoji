@@ -4,7 +4,6 @@ This uses the Wunderground API to export icons representing 4 days worth of
 weather. It's built in ruby. It looks something like:
 
 ![](https://raw.github.com/djcp/cli-weather/master/images/bash_preview.png)
-Font embiggened to show detail. . .
 
 ## Installation
 
