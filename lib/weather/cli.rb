@@ -3,11 +3,11 @@
 module Weather
   class CLI
     ICON_MAPPINGS = {
-      chanceflurries: "❅",
-      chancerain: "☔",
-      chancesleet: "❆",
-      chancesnow: "❆",
-      chancetstorms: "☈",
+      chanceflurries: "~❅",
+      chancerain: "~☔",
+      chancesleet: "~❆",
+      chancesnow: "~❆",
+      chancetstorms: "~☈",
       clear: "☼",
       cloudy: "☁",
       flurries: "❆",
