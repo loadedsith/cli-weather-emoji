@@ -5,6 +5,7 @@ weather. It's built in ruby. It looks something like:
 
 ![](https://raw.github.com/djcp/cli-weather/master/images/bash_preview.png)
 
+
 ## Installation
 
 ```bash
@@ -39,6 +40,37 @@ And then in .bashrc:
   WEATHER=(< ~/.cli-weather-forecast)
   PS1="your current prompt but now with the ${WEATHER}"
 ```
+
+
+##Legend
+###Prefixes
+
+   * Chance of:  ~
+   * Partly: -
+
+###Complete List
+
+   * Chance of Flurries: ~❅
+   * Chance of Rain: ~☔
+   * Chance of Sleet: ~❆
+   * Chance of Snow: ~❆
+   * Chance of Thunder Storms: ~☈
+   * Clear: ☼
+   * Cloudy: ☁
+   * Flurries: ❆
+   * Fog*: ♒
+   * Hazy*: ♒
+   * Mostly Cloudy: ☁
+   * Mostly Sunny: ☀
+   * Partly Cloudy: -☁
+   * Partly Sunny: -☀
+   * Rain*: ☔
+   * Sleet: ❆
+   * Snow: ❆
+   * Sunny: ☼
+   * Thunder Storms: ☈
+
+*:[Monospace fonts with good support for these characters,](https://github.com/Lokaltog/powerline-fonts) will turn the rain, fog, and haze characters into a graphics in your terminal.
 
 ## Author
 
