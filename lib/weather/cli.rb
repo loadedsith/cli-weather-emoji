@@ -2,7 +2,7 @@
 
 module Weather
   class CLI
-    ICON_MAPPINGS = {
+    BASE_MAPPINGS = {
       chanceflurries: "~❅",
       chancerain: "~☔",
       chancesleet: "~❆",
@@ -23,6 +23,12 @@ module Weather
       sunny: "☼",
       tstorms: "☈"
     }
+
+    ICON_MAPPINGS = BASE_MAPPINGS.inject({}) do |memo, arr|
+      memo[arr[0]] = arr[1]
+      memo["nt_#{arr[0]}".to_sym] = arr[1]
+      memo
+    end
 
     def initialize(num_periods = 8)
       @config ||= Weather::Config.new
