@@ -7,6 +7,14 @@ require 'open-uri'
 require 'lib/weather/config'
 require 'lib/weather/cli'
 
-forecast = Weather::CLI.new
 
-puts forecast.forecast_icons.join(' ')
+begin
+  forecast = Weather::CLI.new
+
+  puts "\n"+forecast.forecast_icons.join(' ')
+rescue  => error
+  puts error
+end
+
+
+
