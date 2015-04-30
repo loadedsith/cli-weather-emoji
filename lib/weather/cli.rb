@@ -2,7 +2,7 @@
 
 module Weather
   class CLI
-    BASE_MAPPINGS = {
+    BASE_MAPPINGS_NO_EMOJI = {
       chanceflurries: "~❅",
       chancerain: "~☔",
       chancesleet: "~❆",
@@ -24,6 +24,30 @@ module Weather
       tstorms: "☈"
     }
 
+    BASE_MAPPINGS_EMOJI = {
+      chanceflurries: "❄️?",
+      chancerain: "☔?",
+      chancesleet: "❄️?",
+      chancesnow: "❄️?",
+      chancetstorms: "⚡️?",
+      clear: "☀️",
+      cloudy: "☁️",
+      flurries: "❄️",
+      fog: "🌁",
+      hazy: "🌁",
+      mostlycloudy: "☁️",
+      mostlysunny: "☀️",
+      partlycloudy: "⛅️",
+      partlysunny: "⛅️",
+      rain: "☔",
+      sleet: "❄️",
+      snow: "❄️",
+      sunny: "☀️",
+      tstorms: "⚡️"
+    }
+
+
+    BASE_MAPPINGS = BASE_MAPPINGS_EMOJI
     ICON_MAPPINGS = BASE_MAPPINGS.inject({}) do |memo, arr|
       memo[arr[0]] = arr[1]
       memo["nt_#{arr[0]}".to_sym] = arr[1]
@@ -38,12 +62,24 @@ module Weather
       icons = []
       conditions_request = open(construct_forecast_url)
       json_response = JSON.load conditions_request
+      high = json_response['forecast']['simpleforecast']['forecastday'][0]['high']['fahrenheit']
+      low = json_response['forecast']['simpleforecast']['forecastday'][0]['low']['fahrenheit']
+      conditon =  json_response['forecast']['simpleforecast']['forecastday'][0]['conditions']
+      icon = json_response['forecast']['simpleforecast']['forecastday'][0]['icon']
+      icon = ICON_MAPPINGS[icon.to_sym];
+      result = "#{icon}  #{conditon}: #{low}˚/#{high}˚"
+      t = Time.now
+      t.to_s 
+      date = t.strftime "%l:%M%P"
+
+      icons = [result]
       json_response['forecast']['txt_forecast']['forecastday'].collect do |forecast|
         icons << ICON_MAPPINGS[forecast['icon'].to_sym]
         if forecast['title'].match /night/i
           icons << ' '
         end
       end
+      icons << "updated: " + date
       icons
     end
 
