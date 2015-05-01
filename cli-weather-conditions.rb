@@ -10,7 +10,8 @@ require 'lib/weather/cli'
 
 begin
   forecast = Weather::CLI.new
-  puts forecast.forecast_icons.join(' ')
+  cc = forecast.current_conditions
+  puts cc+'˚ '
 rescue  => error
   puts error
 end

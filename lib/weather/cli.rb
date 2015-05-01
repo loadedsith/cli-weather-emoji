@@ -58,8 +58,14 @@ module Weather
       @config ||= Weather::Config.new
     end
 
+    def current_conditions
+      conditions_request = open(construct_conditions_url)
+      json_response = JSON.load conditions_request
+      json_response['current_observation']['feelslike_f']
+    end
+
     def forecast_icons
-      icons = []
+      
       conditions_request = open(construct_forecast_url)
       json_response = JSON.load conditions_request
       high = json_response['forecast']['simpleforecast']['forecastday'][0]['high']['fahrenheit']
@@ -67,7 +73,8 @@ module Weather
       conditon =  json_response['forecast']['simpleforecast']['forecastday'][0]['conditions']
       icon = json_response['forecast']['simpleforecast']['forecastday'][0]['icon']
       icon = ICON_MAPPINGS[icon.to_sym];
-      result = "#{icon}  #{conditon}: #{low}˚/#{high}˚"
+
+      result = "#{low}˚/#{high}˚"
       t = Time.now
       t.to_s 
       date = t.strftime "%l:%M%P"
@@ -87,6 +94,9 @@ module Weather
 
     def construct_forecast_url
       "http://api.wunderground.com/api/#{@config.api_key}/forecast/q/#{@config.state}/#{@config.city}.json"
+    end
+    def construct_conditions_url
+      "http://api.wunderground.com/api/#{@config.api_key}/conditions/q/#{@config.state}/#{@config.city}.json"
     end
   end
 end
