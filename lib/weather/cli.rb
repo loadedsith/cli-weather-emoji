@@ -61,7 +61,10 @@ module Weather
     def current_conditions
       conditions_request = open(construct_conditions_url)
       json_response = JSON.load conditions_request
-      json_response['current_observation']['feelslike_f']
+      temp = json_response['current_observation']['feelslike_f']+'˚ '
+      icon = json_response['current_observation']['icon']
+      icon = ICON_MAPPINGS[icon.to_sym];
+      icon + '  ' + temp
     end
 
     def forecast_icons
